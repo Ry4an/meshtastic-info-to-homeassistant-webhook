@@ -4,6 +4,7 @@
 from time import sleep
 import json
 import os
+import time
 
 import meshtastic
 import meshtastic.tcp_interface
@@ -32,6 +33,7 @@ def on_connection(interface, topic=pub.AUTO_TOPIC):
 
 def get_info_as_dict(interface):
     info = {
+            "time": int(time.time()),
             "long_name": interface.getLongName(),
             "short_name": interface.getShortName(),
             "my_info": MessageToDict(interface.myInfo),
