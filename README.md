@@ -26,6 +26,7 @@ templates:
         webhook_id: "YOUR_SECRET_WEBHOOK_ID_GOES_HERE"
     sensor:
       - name: "Meshtastic Firmware"
+        unique_id: "meshtastic_firmware"
         state: "{{ trigger.json.metadata.firmwareVersion }}"
 ```
 
