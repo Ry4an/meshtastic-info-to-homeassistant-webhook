@@ -15,14 +15,19 @@ from pubsub import pub
 from google.protobuf.json_format import MessageToDict
 
 MESHTASTIC_HOST = "192.168.86.65"
-HOME_ASSISTANT_HOST = "192.168.86.52"
+HOME_ASSISTANT_HOST = "home.ry4an.org"
 TIMEOUT = 20  # seconds to wait for info response
-WEBHOOK_URL = f"http://{HOME_ASSISTANT_HOST}:8123/api/webhook/{os.environ['WEBHOOK_ID']}"
+WEBHOOK_URL = None
+try:
+    WEBHOOK_URL = f"https://{HOME_ASSISTANT_HOST}/api/webhook/{os.environ['WEBHOOK_ID']}"
+except KeyError:
+    pass
 
 def on_connection(interface, topic=pub.AUTO_TOPIC):
     info = get_info_as_dict(interface)
     print(json.dumps(info, indent=2))
-    push_info_to_ha(info)
+    if WEBHOOK_URL:
+        push_info_to_ha(info)
     interface.close()
 
 def get_info_as_dict(interface):
@@ -44,7 +49,7 @@ def push_info_to_ha(info):
             headers={'Content-Type': "application/json"},
             json=info)
         response.raise_for_status()
-        print("Response: ", response.status_code, response.text)
+        print("Success response: ", response.status_code, response.text)
     except Exception as ex:
         print("Error POSTing", ex)
 
