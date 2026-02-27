@@ -1,6 +1,6 @@
 # Meshtastic Info to Home Assistant Webhook
 
-This is a quick script to use the [meshtastic python API](https://python.meshtastic.org/), which powers the command line tool, to pull full node info and optionally send it to a home assistant webhook for use in sensors.  This is different than using MQTT to get mesh info into home assistant which also works and is [described on the Meshtastic](website).  This could easily be turned into an integration, but a script running from a cronjob works just fine for me.
+This is a quick script to use the [meshtastic python API](https://python.meshtastic.org/), which powers the command line tool, to pull full node info and optionally send it to a home assistant webhook for use in sensors.  This is different than using MQTT to get mesh info into home assistant which also works and is [described on the Meshtastic website](https://meshtastic.org/docs/software/integrations/mqtt/home-assistant/).  This could easily be turned into an integration, but a script running from a cronjob works just fine for me.
 
 ## Setup
 You don't need any requirements that aren't already included in the meshstatic python package, so you can just do:
